@@ -1,11 +1,24 @@
-const isSimple = number => {
-  let i = 2;
+const isSimple = () => {
+  const memo = {};
 
-  for (i; i < number; i++) {
-    if (!(number % i)) return false;
-  }
-  return true;
+  return number => {
+    if (memo[number] !== undefined) return memo[number];
+
+    let i = 2;
+
+    for (i; i < number; i++) {
+      console.count("here");
+      if (!(number % i)) {
+        memo[number] = false;
+        return false;
+      }
+    }
+    memo[number] = true;
+    return true;
+  };
 };
+
+const check = isSimple();
 
 const getSimpleNumbers = number => {
   let i = 2;
@@ -13,7 +26,7 @@ const getSimpleNumbers = number => {
   const numbers = [];
 
   for (i; i < number; i++) {
-    if (isSimple(i)) {
+    if (check(i)) {
       numbers.push(i);
     }
   }
@@ -22,5 +35,6 @@ const getSimpleNumbers = number => {
 };
 
 console.log(`-------------------------`);
+console.log(`numbers`, getSimpleNumbers(100));
 console.log(`numbers`, getSimpleNumbers(100));
 console.log(`-------------------------`);
