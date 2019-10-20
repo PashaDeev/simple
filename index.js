@@ -1,18 +1,18 @@
 const isSimple = () => {
   const memo = {};
+  const simple = [2];
 
   return number => {
     if (memo[number] !== undefined) return memo[number];
 
-    let i = 2;
-
-    for (i; i < number; i++) {
+    for (const simpleNumber of simple) {
       console.count("here");
-      if (!(number % i)) {
+      if (!(number % simpleNumber)) {
         memo[number] = false;
         return false;
       }
     }
+    simple.push(number);
     memo[number] = true;
     return true;
   };
@@ -35,6 +35,5 @@ const getSimpleNumbers = number => {
 };
 
 console.log(`-------------------------`);
-console.log(`numbers`, getSimpleNumbers(100));
 console.log(`numbers`, getSimpleNumbers(100));
 console.log(`-------------------------`);
